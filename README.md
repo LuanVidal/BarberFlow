@@ -1,7 +1,6 @@
 # 💈 BarberFlow - Sistema de Gestão para Barbearias
 
 ![Status do Projeto](https://img.shields.io/badge/Status-Em_Desenvolvimento-yellow)
-![CI Status](https://github.com/SEU_USUARIO/NOME_DO_REPO/actions/workflows/ci.yml/badge.svg)
 
 ## 📋 Sobre o Projeto
 
