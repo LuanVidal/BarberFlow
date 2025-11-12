@@ -1,7 +1,9 @@
 # 💈 BarberFlow - Sistema de Gestão para Barbearias
 
 ![Status do Projeto](https://img.shields.io/badge/Status-Em_Desenvolvimento-yellow)
-![CI Status](https://github.com/SEU_USUARIO/NOME_DO_REPO/actions/workflows/ci.yml/badge.svg) ## 📋 Sobre o Projeto
+![CI Status](https://github.com/SEU_USUARIO/NOME_DO_REPO/actions/workflows/ci.yml/badge.svg)
+
+## 📋 Sobre o Projeto
 
 O **BarberFlow** é uma solução completa desenvolvida para modernizar a gestão de barbearias. O sistema integra o agendamento de clientes com um painel financeiro robusto, permitindo não apenas o controle de horários, mas também a projeção de recebimentos e gestão de comissões.
 
