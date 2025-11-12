@@ -1,0 +1,33 @@
+name: CI - BarberFlow Python TDD
+
+on:
+  push:
+    branches: [ "main", "develop" ]
+  pull_request:
+    branches: [ "main", "develop" ]
+
+jobs:
+  build-and-test:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout do código
+      uses: actions/checkout@v3
+
+    # 2. Configura o Python (Em vez de Node.js)
+    - name: Setup Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.10'
+        cache: 'pip' # Faz cache das dependências para ser mais rápido
+
+    # 3. Instala as dependências do arquivo requirements.txt
+    - name: Instalar Dependências
+      run: |
+        python -m pip install --upgrade pip
+        pip install -r requirements.txt
+
+    # 4. RODA OS TESTES (Pytest)
+    # O Action vai procurar arquivos que começam com "test_"
+    - name: Rodar Testes (TDD)
+      run: pytest
