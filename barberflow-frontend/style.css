@@ -1,1 +1,33 @@
+* {
+    box-sizing: border-box;
+    font-family: Arial, Helvetica, sans-serif;
+}
 
+header {
+    padding: 20px 40px;
+    width: 100%;
+    background-color:royalblue;
+    color: white;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    display: flex;
+    align-items: center;
+}
+
+footer {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    display: flex;
+    background-color: black; 
+    color: white;
+    padding: 10px;
+
+}
+
+.menu {
+  font-size: 20px;
+  display: flex;
+  gap: 30px; 
+  padding-left: 900px;
+}
