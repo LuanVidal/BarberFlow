@@ -7,6 +7,10 @@
     <title>Login</title>
 </head>
 <body>
+    <div id="loading-bar">
+        <div class="loading-pole"></div>
+    </div>
+    
 
     <header>
 
@@ -55,6 +59,35 @@
     <footer>
         © Barberflow - 2025
     </footer>
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            const loadingBar = document.getElementById("loading-bar");
+            const links = document.querySelectorAll("a");
+        
+            // Quando clicar em qualquer link interno
+            links.forEach(link => {
+                link.addEventListener("click", e => {
+                    const url = link.getAttribute("href");
+        
+                    // Evita ativar o loading para links externos
+                    if (!url || url.includes("http")) return;
+        
+                    e.preventDefault();
+        
+                    // Inicia a barra
+                    loadingBar.style.width = "0%";
+                    setTimeout(() => loadingBar.style.width = "60%", 50);
+        
+                    setTimeout(() => loadingBar.style.width = "100%", 600);
+        
+                    setTimeout(() => {
+                        window.location.href = url; 
+                    }, 900);
+                });
+            });
+        });
+        </script>
+        
 
 </body>
 </html>

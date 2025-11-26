@@ -1,33 +1,327 @@
+/* ====== RESET E BASE ====== */
 * {
     box-sizing: border-box;
-    font-family: Arial, Helvetica, sans-serif;
+    margin: 0;
+    padding: 0;
+    font-family: "Georgia", serif;
 }
 
+body {
+    background-color: #f5eddc; /* bege claro vintage */
+    color: #3b2f2f; /* marrom escuro suave */
+    line-height: 1.6;
+}
+
+/* ====== HEADER ====== */
 header {
-    padding: 20px 40px;
     width: 100%;
-    background-color:royalblue;
-    color: white;
-    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    padding: 20px 40px;
+    background: #7b3f00; /* marrom vintage */
+    color: #f5eddc;
     display: flex;
+    justify-content: space-between;
     align-items: center;
+    border-bottom: 4px solid #b08450; /* dourado queimado */
 }
 
+header h1 {
+    font-family: "Garamond", serif;
+    font-size: 36px;
+    letter-spacing: 2px;
+}
+
+/* ====== MENU ====== */
+.menu {
+    display: flex;
+    gap: 25px;
+}
+
+.menu a {
+    text-decoration: none;
+    color: #f5eddc;
+    font-size: 18px;
+    font-weight: bold;
+    transition: 0.3s;
+    padding: 6px 10px;
+    border-radius: 5px;
+}
+
+.menu a:hover {
+    background-color: #b08450; /* dourado vintage */
+    color: #3b2f2f;
+}
+
+/* ====== CONTEÚDO ====== */
+#corpo-home {
+    max-width: 900px;
+    padding: 40px;
+    margin: 40px auto;
+    background: #fff4e6; /* papel antigo */
+    border: 2px solid #d1b38c;
+    border-radius: 10px;
+    box-shadow: 0px 0px 10px rgba(120, 90, 45, 0.3);
+}
+
+#corpo-home h2 {
+    font-size: 30px;
+    margin-bottom: 20px;
+    color: #6b3a1d;
+}
+
+#corpo-home p {
+    font-size: 18px;
+}
+
+/* ====== FOOTER ====== */
 footer {
+    width: 100%;
+    text-align: center;
+    padding: 15px;
+    background: #3b2f2f;
+    color: #f5eddc;
+    border-top: 4px solid #b08450;
     position: fixed;
     bottom: 0;
     left: 0;
+}
+
+/* ====== RESPONSIVO ====== */
+@media (max-width: 768px) {
+    header {
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .menu {
+        gap: 15px;
+    }
+
+    #corpo-home {
+        margin: 20px;
+        padding: 20px;
+    }
+}
+/* ===== POSTE DE BARBEARIA ANIMADO ===== */
+
+.barber-pole {
+    width: 18px;
+    height: 80px;
+    margin-left: 25px;
+    border-radius: 20px;
+    overflow: hidden;
+    border: 3px solid #f5eddc;
+    box-shadow: 0 0 8px rgba(0,0,0,0.3);
+    background: repeating-linear-gradient(
+        45deg,
+        #d9534f 0px,
+        #d9534f 10px,
+        #ffffff 10px,
+        #ffffff 20px,
+        #337ab7 20px,
+        #337ab7 30px,
+        #ffffff 30px,
+        #ffffff 40px
+    );
+    animation: pole-spin 4s linear infinite;
+}
+
+@keyframes pole-spin {
+    from {
+        background-position: 0 0;
+    }
+    to {
+        background-position: 0 160px;
+    }
+}
+/* ===== CONTAINERS DAS OUTRAS PÁGINAS ===== */
+
+#login-box,
+#corpo-cadastro,
+#corpo-sobre {
+    max-width: 600px;
+    margin: 60px auto;
+    padding: 35px;
+    background: #fff4e6; /* papel antigo */
+    border: 2px solid #d1b38c;
+    border-radius: 10px;
+    box-shadow: 0px 0px 10px rgba(120, 90, 45, 0.3);
+}
+
+/* Títulos das páginas */
+#login-box h2,
+#corpo-cadastro h2,
+#corpo-sobre h2 {
+    color: #6b3a1d;
+    margin-bottom: 15px;
+    font-size: 28px;
+}
+
+/* Parágrafos */
+#login-box p,
+#corpo-cadastro p,
+#corpo-sobre p {
+    font-size: 18px;
+    color: #4b3a2a;
+}
+
+/* ===== INPUTS ===== */
+
+input[type="text"],
+input[type="password"],
+input[type="email"],
+input[type="tel"] {
     width: 100%;
+    padding: 12px;
+    border: 2px solid #b08450;
+    border-radius: 8px;
+    background-color: #fffaf3;
+    font-size: 16px;
+    color: #3b2f2f;
+    margin-top: 5px;
+    transition: 0.3s;
+}
+
+input:focus {
+    border-color: #7b3f00;
+    outline: none;
+    background-color: #fff2d9;
+    box-shadow: 0 0 6px rgba(123, 63, 0, 0.4);
+}
+
+label {
+    font-weight: bold;
+    color: #6b3a1d;
+}
+
+/* ===== BOTÕES ===== */
+
+button {
+    background-color: #7b3f00;
+    color: #f5eddc;
+    padding: 12px 25px;
+    border: none;
+    border-radius: 8px;
+    font-size: 18px;
+    cursor: pointer;
+    transition: 0.3s;
+    font-weight: bold;
+}
+
+button:hover {
+    background-color: #b08450;
+    color: #3b2f2f;
+}
+/* ===== LINKS ===== */
+
+a {
+    color: #7b3f00;
+    font-weight: bold;
+    text-decoration: none;
+}
+
+a:hover {
+    color: #b08450;
+    text-decoration: underline;
+}
+/* ===== LISTA DE INTEGRANTES (SOBRE) ===== */
+
+#corpo-sobre ul {
+    margin-top: 10px;
+    padding-left: 20px;
+}
+
+#corpo-sobre li {
+    font-size: 18px;
+    margin-bottom: 6px;
+}
+
+@media (max-width: 768px) {
+
+    #login-box,
+    #corpo-cadastro,
+    #corpo-sobre {
+        margin: 20px;
+        padding: 20px;
+    }
+
+    button {
+        width: 100%;
+    }
+}
+
+/* ====== BARRA DE CARREGAMENTO COM BARBER POLE ====== */
+#loading-bar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 0%;
+    height: 6px;
+    background: transparent;
     display: flex;
-    background-color: black; 
-    color: white;
-    padding: 10px;
-
+    align-items: center;
+    z-index: 9999;
+    overflow: hidden;
+    transition: width 0.4s ease;
 }
 
-.menu {
-  font-size: 20px;
-  display: flex;
-  gap: 30px; 
-  padding-left: 900px;
+/* Pole horizontal dentro da barra */
+.loading-pole {
+    width: 200%;
+    height: 100%;
+    background: repeating-linear-gradient(
+        45deg,
+        #d9534f 0px,
+        #d9534f 10px,
+        #ffffff 10px,
+        #ffffff 20px,
+        #337ab7 20px,
+        #337ab7 30px,
+        #ffffff 30px,
+        #ffffff 40px
+    );
+    animation: barber-loading 1s linear infinite;
 }
+
+@keyframes barber-loading {
+    from { background-position: 0 0; }
+    to { background-position: 80px 0; }
+}
+
+/* ===== LOGO BARBERFLOW COM EFEITO DE BARBER POLE ===== */
+
+.logo-barber {
+    font-family: "Garamond", serif;
+    font-size: 48px;
+    font-weight: bold;
+    letter-spacing: 3px;
+    color: transparent;
+    background-image: repeating-linear-gradient(
+        45deg,
+        #d9534f 0px,
+        #d9534f 12px,
+        #ffffff 12px,
+        #ffffff 24px,
+        #337ab7 24px,
+        #337ab7 36px,
+        #ffffff 36px,
+        #ffffff 48px
+    );
+
+    background-size: 200%;
+    background-position: 0 0;
+    -webkit-background-clip: text;
+    background-clip: text;
+
+    transition: 0.6s ease;
+    cursor: pointer;
+    padding-right: 10px;
+}
+
+/* Animação ao passar o mouse */
+.logo-barber:hover {
+    background-position: 200% 0; /* faz a textura “correr” pelo texto */
+    transform: scale(1.08); /* leve zoom */
+    text-shadow: 0 0 12px rgba(123, 63, 0, 0.4);
+}
+
+
