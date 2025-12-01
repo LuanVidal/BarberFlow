@@ -2,22 +2,22 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { Cadastro } from './cadastro';
 
-describe('Cadastro Component', () => {
-  let fixture: ComponentFixture<Cadastro>;
+describe('Cadastro', () => {
   let component: Cadastro;
+  let fixture: ComponentFixture<Cadastro>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [Cadastro] 
-    }).compileComponents();
+      imports: [Cadastro]
+    })
+    .compileComponents();
 
     fixture = TestBed.createComponent(Cadastro);
     component = fixture.componentInstance;
-
-    fixture.detectChanges(); 
+    await fixture.whenStable();
   });
 
-  it('should create the component', () => {
+  it('should create', () => {
     expect(component).toBeTruthy();
   });
 });

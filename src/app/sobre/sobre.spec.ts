@@ -2,21 +2,22 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { Sobre } from './sobre';
 
-describe('Sobre Component', () => {
-  let fixture: ComponentFixture<Sobre>;
+describe('Sobre', () => {
   let component: Sobre;
+  let fixture: ComponentFixture<Sobre>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [Sobre]
-    }).compileComponents();
+    })
+    .compileComponents();
 
     fixture = TestBed.createComponent(Sobre);
     component = fixture.componentInstance;
-    fixture.detectChanges(); 
+    await fixture.whenStable();
   });
 
-  it('should create the component', () => {
+  it('should create', () => {
     expect(component).toBeTruthy();
   });
 });
