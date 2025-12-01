@@ -4,10 +4,8 @@ import { RouterOutlet } from '@angular/router';
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet],
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css']
+  styleUrls: ['./app.component.css'],
+  imports: [RouterOutlet]
 })
-export class AppComponent {
-  title = 'barberflow-frontend';
-}
+export class AppComponent {}
