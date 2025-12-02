@@ -1,38 +1,27 @@
-<div id="loading-bar">
-    <div class="loading-pole"></div>
+<div class="container">
+  <div class="card">
+    
+    <h2>Bem-vindo</h2>
+    <p>Acesse sua conta para continuar</p>
+
+    <div class="form-group">
+      <label for="email">E-mail</label>
+      <input type="email" id="email" [(ngModel)]="credentials.email" placeholder="exemplo@email.com">
+    </div>
+
+    <div class="form-group">
+      <label for="password">Senha</label>
+      <input type="password" id="password" [(ngModel)]="credentials.password" placeholder="Sua senha">
+    </div>
+
+    <div class="error" *ngIf="errorMessage">
+      {{ errorMessage }}
+    </div>
+
+    <button (click)="login()">Entrar</button>
+
+    <div class="footer">
+      Não tem conta? <a routerLink="/cadastro">Cadastre-se aqui</a>
+    </div>
+  </div>
 </div>
-
-<header>
-    <h1>Barberflow</h1>
-
-    <nav class="menu">
-        <a routerLink="/home">Home</a>
-        <a routerLink="/login">Login</a>
-        <a routerLink="/cadastro">Cadastro</a>
-        <a routerLink="/sobre">Sobre</a>
-    </nav>
-</header>
-
-<div id="login-box">
-    <h2>Bem-vindo ao Barberflow</h2>
-    <p>Insira seus dados de login para prosseguir:</p>
-
-    <form>
-        <label for="login">Login: </label>
-        <input type="text" id="login" placeholder="nome@exemplo.com"><br><br>
-
-        <label for="senha">Senha:</label>
-        <input type="password" id="senha"><br><br>
-
-        <button type="submit">Entrar</button>
-    </form>
-
-    <p>
-        Não possui uma conta?
-        <a routerLink="/cadastro">Crie sua conta agora!</a>
-    </p>
-</div>
-
-<footer>
-    © Barberflow - 2025
-</footer>

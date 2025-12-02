@@ -1,5 +1,6 @@
 from . import db
 from datetime import datetime
+from werkzeug.security import generate_password_hash, check_password_hash # Importe isso no topo
 
 class Service(db.Model):
     __tablename__ = 'services'
@@ -13,10 +14,18 @@ class Service(db.Model):
 
 class Barber(db.Model):
     __tablename__ = 'barbers'
+    
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(100), nullable=False)
     email = db.Column(db.String(120), unique=True, nullable=False)
-    
+    password_hash = db.Column(db.String(128)) # Nova coluna de senha
+
+    def set_password(self, password):
+        self.password_hash = generate_password_hash(password)
+
+    def check_password(self, password):
+        return check_password_hash(self.password_hash, password)
+
     def to_dict(self):
         return {'id': self.id, 'name': self.name, 'email': self.email}
 
@@ -50,4 +59,19 @@ class Appointment(db.Model):
             'user_id': self.user_id,
             'barber_id': self.barber_id,
             'service_id': self.service_id
+        }
+class Settings(db.Model):
+    __tablename__ = 'settings'
+    id = db.Column(db.Integer, primary_key=True)
+    open_time = db.Column(db.String(5), default="08:00")
+    close_time = db.Column(db.String(5), default="18:00")
+    lunch_start = db.Column(db.String(5), default="12:00")
+    lunch_end = db.Column(db.String(5), default="13:00")
+
+    def to_dict(self):
+        return {
+            'open_time': self.open_time,
+            'close_time': self.close_time,
+            'lunch_start': self.lunch_start,
+            'lunch_end': self.lunch_end
         }

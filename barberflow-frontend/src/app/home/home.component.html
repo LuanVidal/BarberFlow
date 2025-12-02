@@ -1,27 +1,102 @@
-<div id="loading-bar">
-    <div class="loading-pole"></div>
-</div>
+<div class="container">
+  
+  <header class="top-bar">
+    <div class="brand">
+      <img src="assets/logo.jpg" onerror="this.src='assets/logo.png'" alt="Logo" class="logo-img">
+      <h1 class="brand-name">BarberFlow</h1>
+    </div>
+    
+    <div class="user-actions">
+      <div class="greeting-container">
+        <span class="welcome-text">Olá, <strong>{{ usuarioNome }}</strong></span>
+        
+        <button class="btn-logout" (click)="logout()" title="Sair">
+          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path>
+            <polyline points="16 17 21 12 16 7"></polyline>
+            <line x1="21" y1="12" x2="9" y2="12"></line>
+          </svg>
+        </button>
+      </div>
+      
+      <button *ngIf="isBarber" (click)="irParaAgendaBarbeiro()" class="btn-outline">
+        Minha Agenda
+      </button>
+    </div>
+  </header>
 
-<header>
-    <h1 class="logo-barber">Barberflow</h1>
-    <div class="barber-pole"></div>
+  <div *ngIf="isLoading" class="loading-overlay">
+    <div class="spinner"></div>
+    <span class="loading-text">Sincronizando...</span>
+  </div>
 
-    <nav class="menu">
-        <a routerLink="/home">Home</a>
-        <a routerLink="/login">Login</a>
-        <a routerLink="/cadastro">Cadastro</a>
-        <a routerLink="/sobre">Sobre</a>
-    </nav>
-</header>
+  <div class="card agendado-card" *ngIf="!isLoading && meuAgendamentoAtual">
+    <div class="check-icon">✅</div>
+    <h2 class="form-title">Tudo Pronto!</h2>
+    <p class="subtitle">Seu horário está confirmado.</p>
 
-<div id="corpo-home">
-    <h2>Barberflow: A solução inteligente para sua Barberia!</h2>
+    <div class="info-group">
+      <div class="info-row">
+        <span>📅 Dia:</span>
+        <strong>{{ meuAgendamentoAtual.date_time | date:'dd/MM/yyyy' }}</strong>
+      </div>
+      <div class="info-row">
+        <span>⏰ Hora:</span>
+        <strong>{{ meuAgendamentoAtual.date_time | date:'HH:mm' }}</strong>
+      </div>
+      <div class="info-row">
+        <span>✂️ Serviço:</span>
+        <strong>{{ meuAgendamentoAtual.service_name }}</strong>
+      </div>
+      <div class="info-row">
+        <span>💈 Profissional:</span>
+        <strong>{{ meuAgendamentoAtual.barber_name }}</strong>
+      </div>
+    </div>
 
-    <p>
-        O BarberFlow é uma solução completa desenvolvida para modernizar a gestão de barbearias...
+    <button class="btn-cancel" (click)="cancelarAgendamento()">Cancelar Agendamento</button>
+  </div>
+
+  <div class="card" *ngIf="!isLoading && !meuAgendamentoAtual">
+    <h2 class="form-title">✂️ Novo Agendamento</h2>
+
+    <p *ngIf="barbeiros.length === 0" style="color: red; text-align: center; font-size: 0.9rem;">
+      Nenhum profissional disponível no momento.
     </p>
-</div>
 
-<footer>
-    © Barberflow - 2025
-</footer>
+    <div *ngIf="barbeiros.length > 0">
+      <label>1. Profissional:</label>
+      <select [(ngModel)]="agendamento.barber_id" (change)="atualizarHorariosDisponiveis()">
+        <option value="" disabled selected>Selecione...</option>
+        <option *ngFor="let b of barbeiros" [value]="b.id">{{ b.name }}</option>
+      </select>
+
+      <label>2. Serviço:</label>
+      <select [(ngModel)]="agendamento.service_id">
+        <option value="" disabled selected>Selecione...</option>
+        <option *ngFor="let s of servicos" [value]="s.id">
+          {{ s.name }} — {{ s.price | currency:'BRL' }}
+        </option>
+      </select>
+
+      <div class="row">
+        <div class="col">
+          <label>3. Data:</label>
+          <input type="date" [(ngModel)]="agendamento.data" [min]="minDate" (change)="atualizarHorariosDisponiveis()">
+        </div>
+        <div class="col">
+          <label>4. Horário:</label>
+          <select [(ngModel)]="agendamento.hora">
+            <option value="" disabled selected>--:--</option>
+            <option *ngFor="let h of horariosFiltrados" [value]="h">{{ h }}</option>
+            <option *ngIf="horariosFiltrados.length === 0" disabled>Lotado!</option>
+          </select>
+        </div>
+      </div>
+
+      <button class="btn-primary" (click)="confirmarAgendamento()">
+        Confirmar Agendamento
+      </button>
+    </div>
+  </div>
+</div>

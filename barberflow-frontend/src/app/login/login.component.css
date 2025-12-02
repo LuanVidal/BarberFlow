@@ -1,0 +1,134 @@
+/* Paleta de Cores da Marca */
+:host {
+  --primary-color: #00264d;   /* Azul marinho da logo */
+  --secondary-color: #004080; /* Azul um pouco mais claro para hover */
+  --text-color: #333;         /* Texto principal */
+  --light-gray: #f4f7f6;      /* Fundo da tela */
+  --white: #ffffff;           /* Fundo do cartão */
+  --error-color: #d9534f;     /* Vermelho para erros */
+}
+
+/* Container Principal */
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  background-color: var(--light-gray);
+  font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+}
+
+/* Cartão do Formulário */
+.card {
+  background: var(--white);
+  padding: 2.5rem;
+  border-radius: 12px;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.08); /* Sombra suave e moderna */
+  width: 100%;
+  max-width: 400px;
+  text-align: center;
+  border-top: 4px solid var(--primary-color); /* Detalhe elegante no topo */
+}
+
+/* Logo */
+.logo {
+  width: 120px;
+  margin-bottom: 1rem;
+}
+
+h2 {
+  color: var(--primary-color);
+  margin-bottom: 0.5rem;
+  font-weight: 600;
+}
+
+p {
+  color: #666;
+  margin-bottom: 2rem;
+  font-size: 0.95rem;
+}
+
+/* Campos do Formulário */
+.form-group {
+  margin-bottom: 1.2rem;
+  text-align: left;
+}
+
+label {
+  display: block;
+  margin-bottom: 0.5rem;
+  color: var(--text-color);
+  font-weight: 500;
+  font-size: 0.9rem;
+}
+
+input {
+  width: 100%;
+  padding: 12px 15px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  font-size: 1rem;
+  box-sizing: border-box;
+  transition: all 0.3s ease;
+  background-color: #fafafa;
+}
+
+input:focus {
+  border-color: var(--secondary-color);
+  box-shadow: 0 0 0 3px rgba(0, 38, 77, 0.1); /* Foco suave com a cor da marca */
+  outline: none;
+  background-color: var(--white);
+}
+
+/* Botão Principal */
+button {
+  width: 100%;
+  padding: 12px;
+  background-color: var(--primary-color);
+  color: var(--white);
+  border: none;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.3s, transform 0.1s;
+  margin-top: 1rem;
+}
+
+button:hover {
+  background-color: var(--secondary-color);
+}
+
+button:active {
+  transform: scale(0.98); /* Efeito de clique */
+}
+
+/* Rodapé */
+.footer {
+  margin-top: 2rem;
+  font-size: 0.9rem;
+  color: #666;
+}
+
+a {
+  color: var(--primary-color);
+  text-decoration: none;
+  font-weight: 600;
+  transition: color 0.2s;
+}
+
+a:hover {
+  color: var(--secondary-color);
+  text-decoration: underline;
+}
+
+/* Mensagem de Erro */
+.error {
+  color: var(--error-color);
+  background-color: #f8d7da;
+  padding: 12px;
+  border-radius: 8px;
+  margin-bottom: 15px;
+  font-size: 0.9rem;
+  border: 1px solid #f5c6cb;
+}

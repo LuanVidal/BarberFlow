@@ -20,19 +20,23 @@ jobs:
       with:
         python-version: '3.10'
         cache: 'pip'
-        # INDICA ONDE ESTÁ O ARQUIVO PARA O CACHE FUNCIONAR
         cache-dependency-path: barberflow-backend/requirements.txt
 
-    # 3. Instala as dependências
-    # CORREÇÃO AQUI: Entramos na pasta (cd) antes de instalar
+    # 3. Instala as dependências (Pytest, Flask, etc.)
     - name: Instalar Dependências
       run: |
         python -m pip install --upgrade pip
+        # Entra na subpasta do Backend
         cd barberflow-backend
+        # Instala libs do requirements.txt + pytest, caso não esteja lá
         pip install -r requirements.txt
+        pip install pytest
 
-    # 4. RODA OS TESTES
-    # CORREÇÃO AQUI: O pytest roda dentro da pasta correta
+    # 4. RODA OS TESTES (Ponto Crítico)
     - name: Rodar Testes (TDD)
       working-directory: ./barberflow-backend
-      run: pytest
+      run: |
+        # Configura a variável de ambiente para o Python encontrar a pasta 'app'
+        export PYTHONPATH=$PYTHONPATH:.
+        # Roda o Pytest com output detalhado
+        pytest -v

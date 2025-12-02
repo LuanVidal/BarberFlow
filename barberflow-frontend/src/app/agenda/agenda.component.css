@@ -1,0 +1,506 @@
+/* --- VARIÁVEIS GLOBAIS --- */
+:host {
+  --primary-color: #00264d;
+  --secondary-color: #004080;
+  --accent-color: #d4af37;
+  --bg-color: #f4f7f6;
+  --white: #ffffff;
+  --success-green: #28a745;
+  --sidebar-width: 260px;
+}
+
+.dashboard-container {
+  display: flex;
+  height: 100vh;
+  background-color: var(--bg-color);
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  overflow: hidden;
+}
+
+/* --- SIDEBAR (Menu Lateral) --- */
+.sidebar {
+  width: var(--sidebar-width);
+  background-color: var(--primary-color);
+  color: var(--white);
+  display: flex;
+  flex-direction: column;
+  padding: 20px 0;
+  box-shadow: 4px 0 15px rgba(0,0,0,0.1);
+  z-index: 100;
+  transition: width 0.3s;
+}
+
+.logo-area {
+  text-align: center;
+  margin-bottom: 40px;
+  padding: 0 20px;
+}
+
+.logo-img {
+  height: 60px;
+  width: auto;
+  border-radius: 8px;
+  background: white;
+  padding: 8px;
+}
+
+.menu-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  flex: 1;
+}
+
+.menu-item {
+  padding: 16px 25px;
+  cursor: pointer;
+  transition: all 0.3s;
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  font-weight: 500;
+  font-size: 0.95rem;
+  border-left: 4px solid transparent;
+  opacity: 0.7;
+}
+
+.menu-item:hover {
+  background-color: rgba(255,255,255,0.05);
+  opacity: 1;
+}
+
+.menu-icon {
+  width: 20px;
+  height: 20px;
+  stroke: currentColor;
+  min-width: 20px;
+}
+
+.menu-item.active {
+  background-color: var(--bg-color);
+  color: var(--primary-color);
+  border-left: 4px solid var(--accent-color);
+  font-weight: 700;
+  opacity: 1;
+  border-radius: 30px 0 0 30px;
+  box-shadow: -5px 5px 10px rgba(0,0,0,0.05);
+}
+
+.logout-area {
+  padding: 20px;
+  border-top: 1px solid rgba(255,255,255,0.1);
+}
+
+.btn-logout {
+  width: 100%;
+  padding: 12px;
+  background: rgba(0,0,0,0.2);
+  border: 1px solid rgba(255,255,255,0.1);
+  color: #ccc;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: 0.2s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  font-size: 0.9rem;
+}
+
+.logout-icon { width: 18px; height: 18px; }
+.btn-logout:hover { background: rgba(220, 53, 69, 0.2); border-color: #dc3545; color: #ffcccc; }
+
+/* --- CONTEÚDO PRINCIPAL --- */
+.main-content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  width: 100%;
+}
+
+.top-header {
+  height: 70px;
+  background-color: var(--white);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 30px;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+  flex-shrink: 0;
+}
+
+.page-title {
+  font-size: 1.5rem;
+  color: var(--primary-color);
+  font-weight: 700;
+  margin: 0;
+}
+
+.user-badge {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-weight: 600;
+  color: #555;
+}
+
+.avatar-circle {
+  width: 35px; height: 35px;
+  background-color: var(--secondary-color);
+  color: white;
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 0.9rem;
+}
+
+.content-scroll {
+  flex: 1;
+  overflow-y: auto;
+  padding: 30px;
+  padding-bottom: 80px;
+}
+
+/* =========================================
+   ESTILOS DA AGENDA (CARD BONITO RESTAURADO)
+   ========================================= */
+
+.empty-state {
+  text-align: center;
+  padding: 50px;
+  color: #888;
+  background: white;
+  border-radius: 12px;
+  border: 2px dashed #eee;
+}
+
+/* O Cartão de Agendamento */
+.appointment-card {
+  background: var(--white);
+  border-radius: 12px;
+  padding: 20px 25px;
+  margin-bottom: 15px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  
+  /* Sombra elegante */
+  box-shadow: 0 4px 6px rgba(0,0,0,0.04);
+  border: 1px solid #f0f0f0;
+  
+  /* Detalhe lateral colorido */
+  border-left: 6px solid var(--secondary-color);
+  
+  transition: transform 0.2s, box-shadow 0.2s;
+  cursor: default;
+}
+
+/* Efeito Hover */
+.appointment-card:hover {
+  transform: translateY(-3px); /* Levanta um pouco */
+  box-shadow: 0 10px 20px rgba(0,0,0,0.08);
+}
+
+/* Coluna da Hora */
+.time-box {
+  text-align: center;
+  padding-right: 25px;
+  border-right: 2px solid #f4f7f6;
+  min-width: 90px;
+}
+
+.time-hour {
+  font-size: 1.6rem;
+  font-weight: 800;
+  color: var(--primary-color);
+  display: block;
+  letter-spacing: -1px;
+}
+
+.time-date {
+  font-size: 0.85rem;
+  color: #888;
+  text-transform: uppercase;
+  font-weight: 600;
+  margin-top: 2px;
+  display: block;
+}
+
+/* Coluna do Cliente */
+.client-info {
+  flex: 1;
+  padding-left: 25px;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.client-name {
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: #333;
+}
+
+/* Badge do Serviço */
+.service-badge {
+  display: inline-block;
+  background-color: #f0f4ff;
+  color: var(--secondary-color);
+  padding: 6px 12px;
+  border-radius: 20px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  width: fit-content;
+}
+
+/* Coluna do Status */
+.status-box {
+  text-align: right;
+}
+
+.status-active {
+  color: #155724;
+  font-weight: 700;
+  font-size: 0.85rem;
+  background: #d4edda;
+  padding: 8px 16px;
+  border-radius: 30px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+/* =========================================
+   ESTILOS DO FATURAMENTO
+   ========================================= */
+.finance-tab {
+  animation: fadeIn 0.5s;
+}
+
+.cards-row {
+  display: flex;
+  gap: 20px;
+  margin-bottom: 30px;
+  flex-wrap: wrap;
+}
+
+.kpi-card {
+  flex: 1;
+  min-width: 200px;
+  padding: 25px;
+  border-radius: 12px;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+  display: flex;
+  flex-direction: column;
+}
+
+.kpi-card.blue { background: var(--primary-color); color: white; }
+.kpi-card.white { background: white; border-left: 5px solid var(--accent-color); color: #333; }
+
+.kpi-card h3 { font-size: 0.9rem; opacity: 0.8; margin: 0 0 10px 0; font-weight: 500; }
+.kpi-card .value { font-size: 2.2rem; font-weight: 700; margin: 0; }
+.kpi-card .sub { font-size: 0.8rem; margin-top: 5px; opacity: 0.7; }
+
+.chart-container {
+  background: white;
+  padding: 20px;
+  border-radius: 12px;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+  margin-bottom: 30px;
+  position: relative; 
+  height: 350px; 
+  width: 100%;
+}
+
+canvas { width: 100% !important; height: 100% !important; }
+
+.history-container {
+  background: white;
+  padding: 25px;
+  border-radius: 12px;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+  overflow-x: auto;
+}
+
+.data-table { width: 100%; border-collapse: collapse; margin-top: 15px; min-width: 500px; }
+.data-table th { text-align: left; color: #888; font-weight: 600; font-size: 0.9rem; padding-bottom: 10px; border-bottom: 1px solid #eee; }
+.data-table td { padding: 12px 0; border-bottom: 1px solid #f9f9f9; color: #333; }
+.data-table .money { font-weight: 700; color: var(--primary-color); }
+
+/* --- RESPONSIVIDADE --- */
+@media (max-width: 768px) {
+  .sidebar { width: 70px; padding: 10px 0; }
+  .logo-img { height: 40px; padding: 5px; }
+  .logo-area { margin-bottom: 20px; padding: 0; }
+  .menu-item span, .btn-logout { display: none; }
+  .menu-item { justify-content: center; padding: 15px 0; }
+  .menu-item.active { border-radius: 0; border-left: 4px solid var(--accent-color); }
+  .logout-area { padding: 10px; display: flex; justify-content: center; }
+  .btn-logout { display: flex; padding: 10px; width: auto; }
+  .logout-icon { display: block; }
+  .main-content { width: calc(100% - 70px); }
+  .top-header { padding: 0 15px; }
+  .page-title { font-size: 1.2rem; }
+  .content-scroll { padding: 15px; }
+  .chart-container { height: 250px; }
+  
+  /* Ajuste Mobile do Card Agenda */
+  .appointment-card { flex-direction: column; align-items: flex-start; gap: 15px; }
+  .time-box { border-right: none; border-bottom: 1px solid #eee; width: 100%; text-align: left; padding-bottom: 10px; margin-bottom: 0; }
+  .client-info { padding-left: 0; }
+  .status-box { width: 100%; text-align: left; }
+}
+
+@keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+
+/* --- ABA CONFIGURAÇÕES --- */
+.config-tab {
+  animation: fadeIn 0.5s;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.card-config {
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+  margin-bottom: 30px;
+  border-top: 4px solid var(--primary-color);
+  overflow: hidden;
+}
+
+.card-header {
+  padding: 20px 25px;
+  border-bottom: 1px solid #eee;
+  background-color: #fafafa;
+}
+
+.card-header h3 { margin: 0; color: var(--primary-color); font-size: 1.1rem; }
+.card-header p { margin: 5px 0 0 0; color: #666; font-size: 0.9rem; }
+
+/* Grid de Horários */
+.form-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 20px;
+  padding: 25px;
+}
+
+.form-item label {
+  display: block;
+  margin-bottom: 8px;
+  font-weight: 600;
+  color: #444;
+  font-size: 0.9rem;
+}
+
+.form-item input[type="time"] {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  font-size: 1rem;
+  color: var(--primary-color);
+  font-weight: bold;
+}
+
+.card-actions {
+  padding: 20px 25px;
+  background-color: #fff;
+  text-align: right;
+  border-top: 1px solid #eee;
+}
+
+.btn-save {
+  background-color: var(--primary-color);
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 6px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: 0.2s;
+}
+.btn-save:hover { background-color: var(--secondary-color); }
+
+/* Lista de Serviços */
+.services-list { padding: 0 25px 25px 25px; }
+
+.service-row {
+  display: flex;
+  align-items: center;
+  padding: 15px 0;
+  border-bottom: 1px solid #eee;
+  gap: 15px;
+}
+
+.header-row {
+  font-weight: bold;
+  color: #888;
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  border-bottom: 2px solid #eee;
+}
+
+.col-name { flex: 2; color: #333; }
+.col-input { flex: 1; }
+.col-action { flex: 0.5; text-align: center; }
+
+.service-row input {
+  width: 100%;
+  padding: 8px;
+  border: 1px solid #eee;
+  border-radius: 4px;
+  text-align: center;
+  margin: 0; /* Reseta margem global */
+}
+
+.service-row input:focus { border-color: var(--primary-color); }
+
+.btn-icon-save {
+  background: #e6f9e9;
+  border: 1px solid #28a745;
+  color: #28a745;
+  border-radius: 6px;
+  width: 35px; height: 35px;
+  cursor: pointer;
+  font-size: 1.2rem;
+  display: flex; align-items: center; justify-content: center;
+  transition: 0.2s;
+}
+.btn-icon-save:hover { background: #28a745; color: white; }
+
+/* --- ADICIONAR SERVIÇO --- */
+.add-row {
+  background-color: #f0fdf4; /* Fundo verde bem clarinho */
+  border-top: 2px dashed #bbf7d0;
+  margin-top: 15px;
+  border-radius: 8px;
+  padding: 10px;
+}
+
+.col-name-input {
+  flex: 2;
+}
+
+.col-name-input input {
+  text-align: left;
+  font-weight: 500;
+}
+
+.btn-add {
+  background-color: var(--success-green);
+  color: white;
+  border: none;
+  padding: 8px 12px;
+  border-radius: 6px;
+  font-weight: bold;
+  cursor: pointer;
+  width: 100%;
+  font-size: 0.85rem;
+  transition: 0.2s;
+}
+
+.btn-add:hover {
+  background-color: #218838;
+  transform: scale(1.05);
+}

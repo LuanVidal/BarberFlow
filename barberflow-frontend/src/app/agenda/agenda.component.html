@@ -1,14 +1,150 @@
-<header>
-    <h1>Barberflow</h1>
+<div class="dashboard-container">
+  
+  <aside class="sidebar">
+    <div class="logo-area">
+      <img src="assets/logo.jpg" onerror="this.src='assets/logo.png'" alt="Logo" class="logo-img">
+    </div>
+    <ul class="menu-list">
+      <li class="menu-item" [class.active]="activeTab === 'horarios'" (click)="mudarAba('horarios')">
+        <svg class="menu-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>
+        <span>Agenda</span>
+      </li>
+      <li class="menu-item" [class.active]="activeTab === 'faturamento'" (click)="mudarAba('faturamento')">
+        <svg class="menu-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="1" x2="12" y2="23"></line><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path></svg>
+        <span>Faturamento</span>
+      </li>
+      <li class="menu-item" [class.active]="activeTab === 'configuracoes'" (click)="mudarAba('configuracoes')">
+        <svg class="menu-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"></circle><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path></svg>
+        <span>Configurações</span>
+      </li>
+    </ul>
+    <div class="logout-area">
+      <button class="btn-logout" (click)="logout()">Sair</button>
+    </div>
+  </aside>
 
-    <nav class="menu">
-        <a routerLink="/home">Home</a>
-        <a routerLink="/login">Login</a>
-        <a routerLink="/cadastro">Cadastro</a>
-        <a routerLink="/sobre">Sobre</a>
-    </nav>
-</header>
+  <main class="main-content">
+    <header class="top-header">
+      <h2 class="page-title">{{ getTituloPagina() }}</h2>
+      <div class="user-badge">
+        <div class="avatar-circle">{{ nomeBarbeiro.charAt(0).toUpperCase() }}</div>
+        <span>{{ nomeBarbeiro }}</span>
+      </div>
+    </header>
 
-<footer>
-    © Barberflow - 2025
-</footer>
+    <div class="content-scroll">
+      
+      <div *ngIf="activeTab === 'horarios'" class="tab-content">
+        <div *ngIf="agendamentos.length === 0" class="empty-state">
+          <h3>Agenda vazia.</h3>
+        </div>
+        <div class="appointment-card" *ngFor="let a of agendamentos">
+          <div class="time-box">
+            <span class="time-hour">{{ a.date_time | date:'HH:mm' }}</span>
+            <span class="time-date">{{ a.date_time | date:'dd/MM' }}</span>
+          </div>
+          <div class="client-info">
+            <span class="client-name">{{ a.client_name }}</span>
+            <span class="service-badge">{{ a.service_name }} - {{ a.service_price | currency:'BRL' }}</span>
+          </div>
+          <div class="status-box"><span class="status-active">Confirmado</span></div>
+        </div>
+      </div>
+
+      <div *ngIf="activeTab === 'faturamento'" class="finance-tab">
+        <div class="cards-row">
+          <div class="kpi-card blue">
+            <h3>Receita Total</h3>
+            <p class="value">{{ faturamentoTotal | currency:'BRL' }}</p>
+            <span class="sub">Acumulado do período</span>
+          </div>
+          <div class="kpi-card white">
+            <h3>Hoje</h3>
+            <p class="value">{{ agendamentosHoje.length }}</p>
+            <span class="sub">Atendimentos agendados</span>
+          </div>
+        </div>
+        <div class="chart-container">
+          <h3>Desempenho Diário</h3>
+          <canvas id="financeChart"></canvas>
+        </div>
+        <div class="history-container">
+          <h3>Histórico de Hoje</h3>
+          <table class="data-table">
+            <thead><tr><th>Hora</th><th>Cliente</th><th>Serviço</th><th>Valor</th></tr></thead>
+            <tbody>
+              <tr *ngFor="let item of agendamentosHoje">
+                <td>{{ item.date_time | date:'HH:mm' }}</td><td>{{ item.client_name }}</td><td>{{ item.service_name }}</td><td class="money">{{ item.service_price | currency:'BRL' }}</td>
+              </tr>
+              <tr *ngIf="agendamentosHoje.length === 0"><td colspan="4" style="text-align: center; color: #999;">Sem vendas hoje.</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <div *ngIf="activeTab === 'configuracoes'" class="config-tab">
+        
+        <div class="card-config">
+          <div class="card-header">
+            <h3>⏰ Horário de Funcionamento</h3>
+            <p>Defina a disponibilidade da agenda.</p>
+          </div>
+          <div class="form-grid">
+            <div class="form-item"><label>Abertura</label><input type="time" [(ngModel)]="config.open_time"></div>
+            <div class="form-item"><label>Fechamento</label><input type="time" [(ngModel)]="config.close_time"></div>
+            <div class="form-item"><label>Início Almoço</label><input type="time" [(ngModel)]="config.lunch_start"></div>
+            <div class="form-item"><label>Fim Almoço</label><input type="time" [(ngModel)]="config.lunch_end"></div>
+          </div>
+          <div class="card-actions">
+            <button class="btn-save" (click)="salvarHorarios()">Salvar Horários</button>
+          </div>
+        </div>
+
+        <div class="card-config">
+          <div class="card-header">
+            <h3>✂️ Gerenciar Serviços</h3>
+            <p>Edite os preços ou adicione novos serviços.</p>
+          </div>
+
+          <div class="services-list">
+            <div class="service-row header-row">
+              <span class="col-name">Nome</span>
+              <span class="col-input">Preço (R$)</span>
+              <span class="col-input">Duração (min)</span>
+              <span class="col-action">Ação</span>
+            </div>
+
+            <div class="service-row" *ngFor="let s of listaServicos">
+              <span class="col-name"><strong>{{ s.name }}</strong></span>
+              <div class="col-input"><input type="number" [(ngModel)]="s.price"></div>
+              <div class="col-input"><input type="number" [(ngModel)]="s.duration"></div>
+              <div class="col-action">
+                <button class="btn-icon-save" (click)="salvarServico(s)" title="Salvar Alteração">💾</button>
+              </div>
+            </div>
+
+            <div class="service-row add-row">
+              <div class="col-name-input">
+                <input type="text" placeholder="Nome do Novo Serviço" [(ngModel)]="novoServico.name">
+              </div>
+              <div class="col-input">
+                <input type="number" placeholder="Preço" [(ngModel)]="novoServico.price">
+              </div>
+              <div class="col-input">
+                <input type="number" placeholder="Min" [(ngModel)]="novoServico.duration">
+              </div>
+              <div class="col-action">
+                <button class="btn-add" (click)="adicionarServico()" title="Adicionar Novo">
+                  + Adicionar
+                </button>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+  </main>
+</div>

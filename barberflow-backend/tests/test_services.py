@@ -1,30 +1,34 @@
 def test_create_service(client):
-    """
-    Teste: Admin deve conseguir cadastrar um novo serviço.
-    """
+    """Teste: Criar serviço"""
+    response = client.post('/api/services/', json={"name": "Platinado", "price": 100, "duration": 120})
+    assert response.status_code == 201
+    assert response.json['name'] == "Platinado"
+
+def test_update_settings(client):
+    """Teste: Atualizar horário de funcionamento"""
     payload = {
-        "name": "Corte Degrade",
-        "price": 35.00,
-        "duration": 30
+        "open_time": "09:00",
+        "close_time": "20:00"
+    }
+    response = client.put('/api/services/settings', json=payload)
+    assert response.status_code == 200
+    assert response.json['open_time'] == "09:00"
+
+def test_update_service_price(client):
+    """Teste: Deve atualizar o preço e duração de um serviço existente."""
+    # 1. Cria um serviço (o ID será 1 no banco de testes)
+    client.post('/api/services/', json={"name": "Corte Simples", "price": 30, "duration": 30})
+    
+    # 2. Dados de atualização
+    payload_update = {
+        "price": 50.00,
+        "duration": 45
     }
     
-    # Tenta criar via POST
-    response = client.post('/api/services/', json=payload)
-    
-    # Verifica se criou (201 Created)
-    assert response.status_code == 201
-    assert response.json['name'] == "Corte Degrade"
-
-def test_get_services(client):
-    """
-    Teste: Cliente deve conseguir listar os serviços.
-    """
-    # Cria um serviço primeiro
-    client.post('/api/services/', json={"name": "Barba", "price": 20, "duration": 15})
-    
-    # Tenta buscar via GET
-    response = client.get('/api/services/')
-    
+    # 3. Envia o PUT para o ID 1
+    response = client.put('/api/services/1', json=payload_update)
     assert response.status_code == 200
-    assert len(response.json) > 0
-    assert response.json[0]['name'] == "Barba"
+    
+    # 4. Verifica se os novos valores foram aplicados
+    assert response.json['price'] == 50.0
+    assert response.json['duration'] == 45

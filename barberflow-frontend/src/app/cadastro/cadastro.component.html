@@ -1,36 +1,28 @@
+<div class="container">
+  <div class="card">
 
-
-    <div id="loading-bar">
-        <div class="loading-pole"></div>
-    </div>
+    <h2>Criar Conta</h2>
+    <p>Preencha seus dados para começar</p>
     
-
-    <div id="corpo-cadastro">
-        <p>Insira os dados necessários para criar a sua conta: </p>
-
-        <form action="#" method="post">
-            <label for="nome">Nome: </label>
-            <input type="text" name="nome"> <br> <br>
-
-            <label for="sobrenome">Sobrenome: </label>
-            <input type="text" name="sobrenome"> <br> <br>
-
-            <label for="email">E-mail: </label>
-            <input type="text" name="email" placeholder="nome@exemplo.com"> <br> <br>
- 
-            <label for="senha">Senha: </label>
-            <input type="password" name="senha"> <br> <br>
- 
-            <label for="telefone">Telefone: </label>
-            <input type="tel" name="telefone" placeholder="(XX) XXXX-XXXX"> <br> <br>
-
-            <button type="submit">Salvar</button>
-        </form>
-
-        <p>
-            Já possui uma conta? <a href="login.html">Faça seu login!</a>
-        </p>
-
+    <div class="form-group">
+      <label for="name">Nome Completo</label>
+      <input type="text" id="name" [(ngModel)]="userData.name" placeholder="Seu Nome">
     </div>
 
- 
+    <div class="form-group">
+      <label for="email">E-mail</label>
+      <input type="email" id="email" [(ngModel)]="userData.email" placeholder="seu@email.com">
+    </div>
+
+    <div class="form-group">
+      <label for="password">Senha</label>
+      <input type="password" id="password" [(ngModel)]="userData.password" placeholder="Crie uma senha forte">
+    </div>
+
+    <button type="button" (click)="cadastrar()">Cadastrar</button>
+
+    <div class="footer">
+      Já tem conta? <a routerLink="/login">Fazer Login</a>
+    </div>
+  </div>
+</div>
