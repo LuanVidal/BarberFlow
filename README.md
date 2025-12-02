@@ -13,7 +13,7 @@ Este sistema foi desenvolvido como parte da avaliação prática da disciplina d
 ## 🚀 Principais Features Entregues
 
 ### 🔐 Autenticação Unificada
-* Login único para **Clientes** e **Barbeiros**, com redirecionamento automático para sua área correta (`/home` ou `/admin`).
+* Login único para **Clientes** e **Barbeiros**, com redirecionamento automático para sua área correta (`/home`).
 
 ### 📅 Agendamento Inteligente
 * Bloqueio automático de horários já marcados.
